@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Carrito de la compra</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <h1>Mi carrito de la compra</h1>
     <?php
+    include('header.php');
+    include('menu.php');
+    echo "<h1 class='carrito'>Mi carrito de la compra</h1>";
         if(isset($_REQUEST['idcarrito'])){
             $idcarrito=$_REQUEST['idcarrito'];
             
@@ -31,7 +34,7 @@
             for($i=0; $i<count($idguardados); $i++){
             $sql="select id,nombre,descripcion,precio from productos where id=$idguardados[$i]";
             $result=$conn->query($sql);
-            echo "<table border='1'>";
+            echo "<table class='tablac'>";
                 echo "<tr>";
                     echo "<th>Nombre</td>"; 
                     echo "<th>Descripción</td>"; 
@@ -79,7 +82,7 @@
             }
         }
 
-        
+       include('footer.php'); 
     ?>
 </body>
 </html>

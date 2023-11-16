@@ -1,0 +1,94 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid mistyrose;
+    background-color: #D6967E;
+}
+header img{
+    width: 10%;
+}
+body{
+    background-image: url(imagenes/fondo.jpg);
+}
+h1{
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.carrito{
+    color: black;
+}
+.menu {
+    border: 1px solid mistyrose;
+    background-color: #D6967E;
+    text-align: center;
+    box-shadow: 2px 2px 5px black;
+    }
+.menu a{
+    color: white;
+    text-decoration: none;
+    border: solid 1px;
+    border-radius: 3px;
+    display: flex;
+    flex-flow: column wrap;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 2px 2px 5px mediumpurple;
+}
+.menu ul{
+    list-style: none;
+    padding-left: 0px;
+}
+article{
+    border: 1px solid;
+    text-align: center;
+    width:350px;
+    height: 500px;
+    margin: 30px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: lightgoldenrodyellow;
+    box-shadow: 2px 2px 5px black;
+}
+.boton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: brown;
+    background-color: #ffd566;
+    text-decoration: none;
+}
+.boton:hover{
+    background-color: #ecc720;
+}
+footer{
+    border: 1px solid mistyrose;
+    background-color: grey;
+}
+footer a{
+    color: black;
+    text-decoration: none;
+}
+nav{ grid-area: n;}
+table{ grid-area: t;}
+section{ grid-area: s;}
+header{ grid-area: h;}
+footer{ grid-area: f;}
+
+main{
+    display: grid;
+    grid-template-areas: 
+    "h h h h h"
+    "n t t t t"
+    "n s s s s"
+    "n f f f f";
+}
+@media screen and (max-width: 1000px){
+    main{
+        grid-template-areas: 
+        "h h h h"
+        "n n n n"
+        "t t t t"
+        "s s s s"
+        "f f f f";
+}
+}
