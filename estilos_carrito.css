@@ -11,10 +11,10 @@ body{
     background-image: url(imagenes/fondo.jpg);
 }
 h1{
-    color: white;
+    margin: 5px;
+    color: black;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-
 .menu {
     border: 1px solid mistyrose;
     background-color: #D6967E;
@@ -36,19 +36,33 @@ h1{
     list-style: none;
     padding-left: 0px;
 }
-article{
-    border: 1px solid;
-    text-align: center;
-    width:350px;
-    height: 500px;
-    margin: 30px auto;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: lightgoldenrodyellow;
-    box-shadow: 2px 2px 5px black;
+table{
+    margin: 5px;
+}
+table th{
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    color: brown;
+    background-color: #ffd566;
+    text-decoration: none;
+}
+table td{
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    color: brown;
+    background-color: white;
+    text-decoration: none;
+}
+table img{
+    width: 10%;
 }
 .boton {
     padding: 10px 20px;
+    margin: 5px;
     border: none;
     border-radius: 5px;
     color: brown;
@@ -67,7 +81,7 @@ footer a{
     text-decoration: none;
 }
 nav{ grid-area: n;}
-#principal{ grid-area: a;}
+article{ grid-area: a;}
 header{ grid-area: h;}
 footer{ grid-area: f;}
 
@@ -88,11 +102,4 @@ main{
         "a a a a"
         "f f f f";
 }
-}
-
-#principal{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    
 }
