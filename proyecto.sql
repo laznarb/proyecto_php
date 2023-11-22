@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clientes` (
-  `id` int(6) UNSIGNED NOT NULL,
+  `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL
@@ -41,12 +41,11 @@ CREATE TABLE `clientes` (
 --
 
 CREATE TABLE `pedidos` (
-  `id` int(6) UNSIGNED NOT NULL,
-  `id_Productos` int(6) NOT NULL,
-  `precio_Productos` int(6) NOT NULL,
+  `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `id_Clientes` int(6) NOT NULL,
   `nombre_Clientes` varchar(20) NOT NULL,
-  `email_Clientes` varchar(50) NOT NULL
+  FOREIGN KEY (id_Clientes) REFERENCES clientes(id),
+  FOREIGN KEY (nombre_Clientes) REFERENCES clientes(nombre)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -56,7 +55,7 @@ CREATE TABLE `pedidos` (
 --
 
 CREATE TABLE `productos` (
-  `id` int(6) UNSIGNED NOT NULL,
+  `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   `precio` int(6) NOT NULL,
@@ -76,51 +75,16 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `estado`, `ima
 (5, 'Delantal', 'Para hacer los mejores trabajos lo mejor es mancharse, pero bastante mejor si no es la ropa', 16, 'disponible', 'imagenes/delantal.jpg'),
 (6, 'Lona', 'Lona de plástico para colocar debajo del lienzo, para que no se manche el suelo sobre el que pintas', 20, 'disponible', 'imagenes/Lona.jpg');
 
---
--- Índices para tablas volcadas
---
+-- --------------------------------------------------------
 
 --
--- Indices de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `pedidos`
---
-ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
+-- Estructura de tabla para la tabla `detalle_pedido`
 --
 
---
--- AUTO_INCREMENT de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pedidos`
---
-ALTER TABLE `pedidos`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `productos`
---
-ALTER TABLE `productos`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+CREATE TABLE `detalle_pedido` (
+  `id_pedido` int(6),
+  `id_producto` int(6),
+  `precio_unidad` int(6),
+  FOREIGN KEY (id_pedido) REFERENCES pedidos(id),
+  FOREIGN KEY (id_producto) REFERENCES productos(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
