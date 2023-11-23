@@ -39,13 +39,15 @@ h1{
 article{
     border: 1px solid;
     text-align: center;
-    width:350px;
-    height: 500px;
+    width:450px;
     margin: 30px auto;
     border-radius: 10px;
     overflow: hidden;
     background-color: lightgoldenrodyellow;
     box-shadow: 2px 2px 5px black;
+}
+article img{
+    width: 65%;
 }
 .boton {
     padding: 10px 20px;

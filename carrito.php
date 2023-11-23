@@ -63,13 +63,14 @@
                 echo "<td><img src=".$row['imagen']." alt='imagen'></td>"; 
                 echo "<td>".$row['nombre']."</td>"; 
                 echo "<td>".$row['descripcion']."</td>"; 
-                echo "<td>".$row['precio']."</td>"; 
+                echo "<td>".$row['precio']."</td>";
+                $total+=$row['precio'];
                 echo "</tr>";
-            }
-
+            }    
         }
         echo "</table>";
-
+        
+        echo "TOTAL: $total";
         echo "<p><a class='boton' href='vaciar.php'>Borrar todo</a></p>";
         echo "<p><a class='boton' href='pedido.php'>Hacer pedido</a></p>";
     }else{

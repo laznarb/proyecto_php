@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS `proyecto`;
+USE `proyecto`;
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -29,9 +31,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `clientes` (
   `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `apellido` varchar(20) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `usuario` varchar(20) NOT NULL,
+  `contraseña` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -43,9 +44,8 @@ CREATE TABLE `clientes` (
 CREATE TABLE `pedidos` (
   `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `id_Clientes` int(6) NOT NULL,
-  `nombre_Clientes` varchar(20) NOT NULL,
-  FOREIGN KEY (id_Clientes) REFERENCES clientes(id),
-  FOREIGN KEY (nombre_Clientes) REFERENCES clientes(nombre)
+  `usuario` varchar(20) NOT NULL,
+  FOREIGN KEY (id_Clientes) REFERENCES clientes(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -88,3 +88,22 @@ CREATE TABLE `detalle_pedido` (
   FOREIGN KEY (id_pedido) REFERENCES pedidos(id),
   FOREIGN KEY (id_producto) REFERENCES productos(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administradores`
+--
+
+CREATE TABLE `administradores` (
+  `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `usuario` varchar(20),
+  `contraseña` varchar(200)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `administradores`
+--
+
+INSERT INTO `administradores` (`id`, `usuario`, `contraseña`) VALUES
+(1, `admin1`, SHA(`123`));  
