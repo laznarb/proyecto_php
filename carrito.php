@@ -72,7 +72,7 @@
         
         echo "TOTAL: $total";
         echo "<p><a class='boton' href='vaciar.php'>Borrar todo</a></p>";
-        echo "<p><a class='boton' href='pedido.php'>Hacer pedido</a></p>";
+        echo "<p><a class='boton' href='loginpedido.php'>Hacer pedido</a></p>";
     }else{
         echo "No se encuentra el producto que solicitas";
     }
