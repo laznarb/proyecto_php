@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <h1>INICIA SESIÓN PARA REALIZAR TU PEDIDO</h1>
+    <h1>INTRODUZCA SUS CREDENCIALES DE ADMINISTRACIÓN</h1>
         <form action="#" method="POST">
             <label for="usuario">Nombre de usuario:</label>
             <input id="usuario" type="text" name="usuario"><br/>
@@ -34,7 +34,7 @@
 
             include('conexion.php');
 
-            $sql = "SELECT id, usuario, contraseña FROM clientes WHERE usuario = '$usuario' AND contraseña = '$contraseña'";
+            $sql = "SELECT id, usuario, contraseña FROM administradores WHERE usuario = '$usuario' AND contraseña = '$contraseña'";
             $result = $conn->query($sql);
 
             $row = $result -> fetch_assoc();
@@ -42,10 +42,10 @@
             if ($result->num_rows > 0) {
                 session_start();
                 $_SESSION['usuario']=$usuario;
-                $_SESSION['id']=$id;
-                header('Location: pedido.php');
+                $_SESSION['contraseña']=$contraseña;
+                header('Location: admin.php');
             } else {
-                header('Location: loginpedido.php');
+                header('Location: loginadmin.php');
             }
         }
     ?>

@@ -64,6 +64,7 @@
                 echo "<td>".$row['nombre']."</td>"; 
                 echo "<td>".$row['descripcion']."</td>"; 
                 echo "<td>".$row['precio']."</td>";
+                $total=0;
                 $total+=$row['precio'];
                 echo "</tr>";
             }    
@@ -75,6 +76,10 @@
         echo "<p><a class='boton' href='loginpedido.php'>Hacer pedido</a></p>";
     }else{
         echo "No se encuentra el producto que solicitas";
+    }
+    if(isset($_SESSION['mensaje'])){
+        echo $_SESSION['mensaje'];
+        session_destroy();
     }
     echo "</article>";
        include('footer.php'); 
