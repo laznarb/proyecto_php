@@ -21,15 +21,12 @@
             while($row = $result->fetch_assoc()) {
                 $id=$row['id'];
                 $precio=$row['precio'];
+                $sql="INSERT INTO `detalle_pedido`(`id_pedido`,`id_producto`, `precio_unidad`) VALUES ($last_id,$id,$precio)";
+                $conn->query($sql);
             }
-            $sql="INSERT INTO `detalle_pedido`(`id_pedido`,`id_producto`, `precio_unidad`) VALUES ($last_id,$id,$precio)";
-            $conn->query($sql);
-            
-            $conn->close();
-
-            session_start();
+        }
+        session_start();
             $_SESSION['mensaje'] = 'Pedido realizado con éxito';
             header('Location: carrito.php');
-        }
-    }
+    }    
 ?>

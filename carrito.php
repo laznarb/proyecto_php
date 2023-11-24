@@ -64,7 +64,6 @@
                 echo "<td>".$row['nombre']."</td>"; 
                 echo "<td>".$row['descripcion']."</td>"; 
                 echo "<td>".$row['precio']."</td>";
-                $total=0;
                 $total+=$row['precio'];
                 echo "</tr>";
             }    

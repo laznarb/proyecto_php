@@ -1,11 +1,9 @@
-CREATE DATABASE IF NOT EXISTS `proyecto`;
-USE `proyecto`;
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2023 a las 11:46:01
+-- Tiempo de generación: 24-11-2023 a las 21:20:20
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -22,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyecto`
 --
+CREATE DATABASE IF NOT EXISTS `proyecto` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `proyecto`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administradores`
+--
+
+DROP TABLE IF EXISTS `administradores`;
+CREATE TABLE IF NOT EXISTS `administradores` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(20) DEFAULT NULL,
+  `contraseña` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `administradores`
+--
+
+INSERT INTO `administradores` (`id`, `usuario`, `contraseña`) VALUES
+(1, 'admin1', '123');
 
 -- --------------------------------------------------------
 
@@ -29,11 +50,44 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `clientes`
 --
 
-CREATE TABLE `clientes` (
-  `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+DROP TABLE IF EXISTS `clientes`;
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(20) NOT NULL,
-  `contraseña` varchar(20) NOT NULL
+  `contraseña` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `usuario`, `contraseña`) VALUES
+(1, 'lucia', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_pedido`
+--
+
+DROP TABLE IF EXISTS `detalle_pedido`;
+CREATE TABLE IF NOT EXISTS `detalle_pedido` (
+  `id_pedido` int(6) DEFAULT NULL,
+  `id_producto` int(6) DEFAULT NULL,
+  `precio_unidad` int(6) DEFAULT NULL,
+  KEY `id_pedido` (`id_pedido`),
+  KEY `id_producto` (`id_producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_pedido`
+--
+
+INSERT INTO `detalle_pedido` (`id_pedido`, `id_producto`, `precio_unidad`) VALUES
+(3, 1, 12),
+(3, 2, 60),
+(3, 3, 38);
 
 -- --------------------------------------------------------
 
@@ -41,12 +95,21 @@ CREATE TABLE `clientes` (
 -- Estructura de tabla para la tabla `pedidos`
 --
 
-CREATE TABLE `pedidos` (
-  `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+DROP TABLE IF EXISTS `pedidos`;
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `id_Clientes` int(6) NOT NULL,
   `usuario` varchar(20) NOT NULL,
-  FOREIGN KEY (id_Clientes) REFERENCES clientes(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`),
+  KEY `id_Clientes` (`id_Clientes`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `id_Clientes`, `usuario`) VALUES
+(3, 1, 'lucia');
 
 -- --------------------------------------------------------
 
@@ -54,14 +117,16 @@ CREATE TABLE `pedidos` (
 -- Estructura de tabla para la tabla `productos`
 --
 
-CREATE TABLE `productos` (
-  `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+DROP TABLE IF EXISTS `productos`;
+CREATE TABLE IF NOT EXISTS `productos` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   `precio` int(6) NOT NULL,
   `estado` varchar(10) NOT NULL,
-  `imagen` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `imagen` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -75,35 +140,24 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `estado`, `ima
 (5, 'Delantal', 'Para hacer los mejores trabajos lo mejor es mancharse, pero bastante mejor si no es la ropa', 16, 'disponible', 'imagenes/delantal.jpg'),
 (6, 'Lona', 'Lona de plástico para colocar debajo del lienzo, para que no se manche el suelo sobre el que pintas', 20, 'disponible', 'imagenes/Lona.jpg');
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `detalle_pedido`
+-- Restricciones para tablas volcadas
 --
 
-CREATE TABLE `detalle_pedido` (
-  `id_pedido` int(6),
-  `id_producto` int(6),
-  `precio_unidad` int(6),
-  FOREIGN KEY (id_pedido) REFERENCES pedidos(id),
-  FOREIGN KEY (id_producto) REFERENCES productos(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
+--
+-- Filtros para la tabla `detalle_pedido`
+--
+ALTER TABLE `detalle_pedido`
+  ADD CONSTRAINT `detalle_pedido_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`),
+  ADD CONSTRAINT `detalle_pedido_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`);
 
 --
--- Estructura de tabla para la tabla `administradores`
+-- Filtros para la tabla `pedidos`
 --
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`id_Clientes`) REFERENCES `clientes` (`id`);
+COMMIT;
 
-CREATE TABLE `administradores` (
-  `id` int(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  `usuario` varchar(20),
-  `contraseña` varchar(200)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `administradores`
---
-
-INSERT INTO `administradores` (`id`, `usuario`, `contraseña`) VALUES
-(1, `admin1`, SHA(`123`));  
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
